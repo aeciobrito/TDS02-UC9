@@ -44,5 +44,5 @@ Leiaute responsivo com media queries e mobile-first.
 recomendações de boas práticas.  
 - Servidor web: conceitos, aplicação, parametrização e publicação de páginas de Internet.  
 - Domínios de Internet: conceito, registro, cotação de preços e disponibilidade de
-serviços.
+serviços
  
