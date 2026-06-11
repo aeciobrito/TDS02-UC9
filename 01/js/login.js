@@ -1,10 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const token = localStorage.getItem('token');
     const authSection = document.getElementById("auth-section");
     const mainContent = document.getElementById("main-content");
     const navMenu = document.getElementById("nav-menu");
     const btnLogout = document.getElementById("btn-logout");
 
-    if(false) {
+    if(token) {
         authSection.style.display = 'none';
         mainContent.style.display = 'block';
         navMenu.style.display = 'inline-block';
@@ -17,10 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const loginForm = document.getElementById("login-form");
-    if(loginForm) {
-        // escrevo lógica de enviar submit com email e senha
-        // recupero da resposta o token
-        // salvo o token no localStorage
+    if(loginForm) {        
         loginForm.addEventListener('submit', async(e) => {
             e.preventDefault();
 
@@ -34,13 +32,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: JSON.stringify({email, senha})
                 });
 
-                console.log(await response.json());
+                if(response.ok) {
+                    const data = await response.json();
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('usuario', JSON.stringify(data.usuario));
+                    window.location.reload();
+                } else {
+                    const errorData = await response.json();
+                    console.log(errorData);
+                }
 
             } catch (err) {
                 console.log(err);
             }
-
-
         });
     }
 });
