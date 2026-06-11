@@ -48,3 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+function logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('usuario');
+    window.location.reload();
+}
